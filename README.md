@@ -1,0 +1,1 @@
+This repository contains all of my shell basics projects. Trade carefully as you go through this repository. The amount of knowledge inside here, will crack open your head and brain. Trade carefully.
