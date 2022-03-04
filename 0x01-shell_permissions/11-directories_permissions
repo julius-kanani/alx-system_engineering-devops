@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R 711 $(find ./* -type d) 
+chmod -R a+x $(find ./* -type d) 
