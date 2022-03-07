@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -1t $(find * -type f) 
+ls -1t $(find * -type f) | head -n 10 
