@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times
+
+LIMIT=20	# 10 iterations.
+a=1
+
+while [ "$a" -le $LIMIT ]
+do
+	echo "$a"
+	case "$a" in 
+		4)
+			echo "badluck from China"
+			;;
+		9)
+			echo "badluck from Japan"
+			;;
+		17)
+			echo "badluck from Italy"
+			;;
+	esac
+	(( a+= 1 ))
+done
+
+exit 0
