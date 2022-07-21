@@ -9,13 +9,13 @@ do
 	echo "$a"
 	case "$a" in 
 		4)
-			echo "badluck from China"
+			echo "bad luck from China"
 			;;
 		9)
-			echo "badluck from Japan"
+			echo "bad luck from Japan"
 			;;
 		17)
-			echo "badluck from Italy"
+			echo "bad luck from Italy"
 			;;
 	esac
 	(( a+= 1 ))
