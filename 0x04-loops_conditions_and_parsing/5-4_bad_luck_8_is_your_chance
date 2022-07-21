@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times
+
+LIMIT=10	# 10 iterations.
+a=1
+
+while [ "$a" -le $LIMIT ]
+do
+	if [ "$a" == 4 ]
+	then
+		echo "bad luck"
+	elif [ "$a" == 8 ]
+	then
+		echo "good luck"
+	else
+		echo "Best School"
+	fi
+	(( a+= 1 ))
+done
+
+exit 0
