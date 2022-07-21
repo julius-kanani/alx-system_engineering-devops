@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times
+
+LIMIT=10	# 10 iterations.
+a=1
+
+while [ "$a" -le $LIMIT ]
+do
+	echo "Best School"
+	(( a+= 1 ))
+done
