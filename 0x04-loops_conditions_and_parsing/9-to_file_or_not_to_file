@@ -10,7 +10,7 @@ if [ -e "$FILE" ]; then
 	echo "$FILE file is empty"
     fi
     if [ -f "$FILE" ]; then
-	echo "$FILE file is a regular file"
+	echo "$FILE is a regular file"
     fi
 else
     echo "$FILE file does not exist"
