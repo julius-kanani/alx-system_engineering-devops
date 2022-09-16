@@ -1,4 +1,4 @@
-# install Flask python package
+# install Flask python package.
 
 exec { 'install flask':
   command => 'pip3 install flask==2.1.0'
