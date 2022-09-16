@@ -1,3 +1,5 @@
+# Create a file in /tmp.
+
 $folder = '/tmp'
 
 file { $folder:
