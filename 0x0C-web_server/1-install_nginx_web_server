@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# Install nginx web server.
-
+#Web servers are the piece of software generating and serving HTML pages!
 sudo apt-get -y update
 sudo apt-get -y install nginx
-sudo ufw allow "Nginx HTTP"
-sudo chown -R $USER:$USER /var/www/html/index.nginx-debian.html
-sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
-sudo service nginx restart
+sudo ufw allow 'Nginx HTTP'
+echo "Hello World!" > /var/www/html/index.html
+service nginx start
