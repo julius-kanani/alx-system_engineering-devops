@@ -1,0 +1,9 @@
+#!/bin/bash
+# Configure nginx server so that /redirect_me is redirecting to another page.
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow "Nginx HTTP"
+# Redirect to /redirect_me to a youtube video
+sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+sudo service nginx restart
