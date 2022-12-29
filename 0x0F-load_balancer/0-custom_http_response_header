@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Configures Nginx so that its HTTP response contains a custom header.
+# The name of the custom header is X-Served-By.
+# The value of the custom HTTP header is the hostname of the server Nginx
+# is running on.
