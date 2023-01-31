@@ -23,7 +23,7 @@ def top_ten(subreddit):
     req = requests.get(R_API, headers=header, allow_redirects=False)
 
     if req.status_code != 200:
-        Print('None')
+        print('None')
     else:
         # load response unit from the request json
         data = req.json()['data']
