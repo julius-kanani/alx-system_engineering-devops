@@ -21,7 +21,7 @@ def recurse(subreddit, hot_list=[]):
 
     # GET request to the REDDIT API to retrieve information about
     # hot articles in a given subreddit.
-    response = requests.get(url, headers)
+    response = requests.get(url, headers, allow_redirects=False)
     if response.status_code == 404:
         # if subreddit does not exist
         return None
