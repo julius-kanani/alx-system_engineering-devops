@@ -6,6 +6,6 @@ i=0
 printmessage="Best School"
 
 while [ $i -lt $LIMIT ]; do
-	echo $printmessage
+	echo "$printmessage"
 	(( i+= 1 ))
 done
