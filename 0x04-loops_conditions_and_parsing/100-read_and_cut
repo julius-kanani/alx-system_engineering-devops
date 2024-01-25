@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 #A bash Script that displays the contents of the file /etc/passwd.
-#The script only displays: username:userid:home:dir
 
 # Specify the file path
 passwd_file="/etc/passwd"
@@ -10,4 +9,3 @@ while IFS=: read -r username _ userid _ _ home_dir _; do
     # Print the desired information
     echo "$username:$userid:$home_dir"
 done < "$passwd_file"
-
