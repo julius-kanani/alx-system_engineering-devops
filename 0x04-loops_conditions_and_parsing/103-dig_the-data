@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+script_dir=$(pwd)
+file_name="apache-access.log"
+file_path="$script_dir/$file_name"
+
+awk '{ count[$1" "$9]++ } END {for (key in count) print count[key], key } ' "$file_path" | sort -nr
