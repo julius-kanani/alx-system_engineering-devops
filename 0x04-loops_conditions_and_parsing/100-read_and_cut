@@ -1,8 +1,6 @@
 #!/usr/bin/bash
-: <<'COMMENT'
-A bash Script that displays the contents of the file /etc/passwd.
-The script only displays: username:userid:home:dir
-COMMENT
+#A bash Script that displays the contents of the file /etc/passwd.
+#The script only displays: username:userid:home:dir
 
 # Specify the file path
 passwd_file="/etc/passwd"
