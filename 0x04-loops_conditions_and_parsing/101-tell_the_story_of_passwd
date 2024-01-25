@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# A bash Script that tells the story of the /etc/passwd file.
+
+passwd_file="/etc/passwd"
+
+while IFS=: read -r username password user_id group_id user_info home_dir command_shell;
+do
+	echo "The user $username is part of the $group_id gang, lives in $home_dir and rides $command_shell. $user_id's place is protected by the passcode $password, more info about the user here: $user_info"
+done < "$passwd_file"
