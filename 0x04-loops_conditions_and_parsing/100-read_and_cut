@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #A bash Script that displays the contents of the file /etc/passwd.
 
 while read -r line; do
