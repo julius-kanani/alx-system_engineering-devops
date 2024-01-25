@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# A bash script that displays the visitor IP along with the HTTP status code from the apache log file.
+
+script_dir=$(pwd)
+log_file="apache-access.log"
+file_path="$script_dir/$log_file"
+
+# use awk to display IP and HTTP status code
+awk '{ print $1, $9 }' "$file_path" 
