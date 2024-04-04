@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 # Configures Nginx so that its HTTP response contains a custom header.
+sudo apt update
+sudo apt install -y nginx
+
+# shellcheck disable=SC2154
 # The name of the custom header is X-Served-By.
 # The value of the custom HTTP header is the hostname of the server Nginx
 # is running on.
+header_config="add_header X-Served-By \$hostname;"
+
+sudo sed -i "/server_name _;/ a \ \ \ \ $header_config" /etc/nginx/sites-available/default
+
+# Restart nginx to apply the changes.
+sudo systemctl restart nginx
