@@ -2,4 +2,4 @@
 # Script that make nginx listen to port 80
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 kill "$(pgrep 'nginx' | head -1)"
-service nginx start
+systemctl restart nginx
