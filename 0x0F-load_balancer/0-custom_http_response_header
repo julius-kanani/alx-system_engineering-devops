@@ -3,7 +3,7 @@
 sudo apt update
 sudo apt install -y nginx
 
-# shellcheck disable=SC2154
+shellcheck disable=SC2154
 # The name of the custom header is X-Served-By.
 # The value of the custom HTTP header is the hostname of the server Nginx
 # is running on.
