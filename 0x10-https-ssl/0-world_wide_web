@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# A Script that will display information about subdomains
+
+query_dns() {
+    local domain=$1
+    local subdomain=$2
+
+    if [ -z "$subdomain" ]; then
+        subdomains=("www" "lb-01" "web-01" "web-02")
+    else
+        subdomains=("$subdomain")
+    fi
+
+
+    for sub in "${subdomains[@]}"; do
+        destination=$(dig +short "$sub.$domain")
+        record_type=$(dig "$sub.$domain" | awk '/^'"$sub\.$domain"'/{print $4}')
+
+        if [ -z "$destination" ]; then
+            echo "No DNS record found for subdomain $sub"
+        else
+            echo "The subdomain $sub is a $record_type record and points to $destination"
+        fi
+    done
+}
+
+domain=$1
+subdomain=$2
+
+query_dns "$domain" "$subdomain"
