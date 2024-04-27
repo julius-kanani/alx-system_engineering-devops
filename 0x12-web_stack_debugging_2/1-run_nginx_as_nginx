@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Check if nginx user exists
+if ! id -u nginx &>/dev/null; then
+    # Create nginx user if it doesn't exist
+    sudo adduser --system --no-create-home --disabled-login --group nginx
+fi
+
+# Update nginx configuration to run as nginx user
+sudo sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
+
+# Update nginx configuration to listen on all active IPs on port 8080
+sudo sed -i 's/listen\s*80;/listen 8080;/g' /etc/nginx/sites-enabled/default
+
+# Restart nginx service
+if ! sudo service nginx restart; then
+    echo "Failed to restart nginx service"
+    systemctl status nginx.service
+    journalctl -xeu nginx.service
+fi
