@@ -20,7 +20,7 @@ def number_of_subscribers(subreddit):
     url = f'https://www.reddit.com/r/{subreddit}/about.json'
     headers = {'User-Agent': '1011-BH'}  # Set a custom User-Agent to avoid
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, allow_redirects=False)
         response.raise_for_status()  # Raise an exception for HTTP errors
         data = response.json()
 
