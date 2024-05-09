@@ -1,42 +1,33 @@
 #!/usr/bin/python3
 """
-How many subs?
-Queries the Reddit API and returns the number of subscribers (not active
-users, total subscribers) for a given subreddit.
-Returns 0, If an invalid subreddit is given.
+0-subs
 """
-
-
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """ Returns the number of subscribers (not active users, total
-        subscribers) for a given subreddit. If an invalid subreddit is
-        given, the function returns 0.
     """
+    Queries the Reddit API and returns the number of subscribers for a given
+    subreddit.
 
-    REDDIT_API = "https://www.reddit.com/r/{}.json".format(subreddit)
+    Args:
+        subreddit (str): The name of the subreddit.
 
-    # set custom user-agent
-    user_agent = "1011-BH"
+    Returns:
+        int: The number of subscribers for the subreddit, or 0 if the
+        subreddit is invalid.
+    """
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
+    headers = {'User-Agent': '1011-BH'}  # Set a custom User-Agent to avoid
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        data = response.json()
 
-    # custom user-agent avoids request limit
-    header = {"User-Agent": user_agent}
-
-    response = requests.get(REDDIT_API, headers=header, allow_redirects=False)
-
-    if response.status_code != 200:
+        # Check if the 'subscribers' key exists in the response
+        if 'data' in data and 'subscribers' in data['data']:
+            return data['data']['subscribers']
+        else:
+            return 0
+    except requests.RequestException as e:
         return 0
-
-    # load response from json
-    data = response.json()['data']
-
-    # extract list of pages
-    pages = data['children']
-
-    # extract data from first page
-    page_data = pages[0]['data']
-
-    # return number of subreddit subscribers
-    return page_data['subreddit_subscribers']
