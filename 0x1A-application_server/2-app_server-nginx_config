@@ -1,10 +1,18 @@
 server {
+    # Listen for incoming HTTP requests on port 80
     listen 80;
+
+    # Associate this server block with requests made to the specified IP address
     server_name 54.237.71.249;
 
     location /airbnb-onepage/ {
+        # Proxy requests with the specified path prefix to a backend server running locally on port 5000
         proxy_pass http://127.0.0.1:5000;
+
+        # Set the Host header of the proxied request to the value of the original request's Host header
         proxy_set_header Host $host;
+
+        # Set the X-Real-IP header of the proxied request to the IP address of the client making the request
         proxy_set_header X-Real-IP $remote_addr;
     }
 }
