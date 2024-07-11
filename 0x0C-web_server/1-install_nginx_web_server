@@ -1,9 +1,53 @@
-#!/usr/bin/env bash
-# Install nginx on web server; Nginx should be listening on port 80
+#!/bin/env bash
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo ufw allow "Nginx HTTP"
-sudo chown -R "$USER":"$USER" /var/www/html/index.nginx-debian.html
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-sudo service nginx restart
+# Update package lists
+sudo apt update
+
+# Install Nginx
+sudo apt -y install nginx
+
+# Adjust the firewall to allow access to the Nginx service
+sudo ufw app list
+sudo ufw allow 'Nginx HTTP'
+
+# Enable ufw if inactive
+if [ "$(sudo ufw status)" == "Status: inactive" ]; then
+    sudo ufw enable
+    sudo ufw allow OpenSSH
+fi
+
+# Create a new directory for the caesarus.tech website and set the appropriate permissions
+sudo mkdir -p /var/www/caesarus.tech/html
+sudo chown -R $USER:$USER /var/www/caesarus.tech/html
+sudo chmod -R 755 /var/www/caesarus.tech
+
+# Create an index.html file for the caesarus.tech website
+sudo echo "Hello World!" > /var/www/caesarus.tech/html/index.html
+
+# Create a new configuration file for the caesarus.tech server block
+sudo cat > /etc/nginx/sites-available/caesarus.tech <<EOL
+server {
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/caesarus.tech/html;
+    index index.html;
+
+    server_name caesarus.tech localhost 18.210.15.46;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOL
+
+# Create a symbolic link to enable the caesarus.tech server block configuration
+sudo ln -s /etc/nginx/sites-available/caesarus.tech /etc/nginx/sites-enabled/
+
+# Test the Nginx configuration
+sudo nginx -t
+
+# If the configuration is valid, restart Nginx
+if [ $? -eq 0 ]; then
+    sudo systemctl restart nginx
+fi
