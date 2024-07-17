@@ -1,6 +1,6 @@
-#!/bin/env bash
+#!/usr//bin/env bash
+# instal nginx web server
 
-# Update package lists
 sudo apt update
 
 # Install Nginx
@@ -49,5 +49,5 @@ sudo nginx -t
 
 # If the configuration is valid, restart Nginx
 if sudo nginx -t; then
-    sudo systemctl restart nginx
+    sudo service nginx restart
 fi
