@@ -18,14 +18,14 @@ fi
 
 # Create a new directory for the caesarus.tech website and set the appropriate permissions
 sudo mkdir -p /var/www/caesarus.tech/html
-sudo chown -R $USER:$USER /var/www/caesarus.tech/html
+sudo chown -R "$USER":"$USER" /var/www/caesarus.tech/html
 sudo chmod -R 755 /var/www/caesarus.tech
 
 # Create an index.html file for the caesarus.tech website
-sudo echo "Hello World!" > /var/www/caesarus.tech/html/index.html
+echo "Hello World!" | sudo tee /var/www/caesarus.tech/html/index.html > /dev/null
 
 # Create a new configuration file for the caesarus.tech server block
-sudo cat > /etc/nginx/sites-available/caesarus.tech <<EOL
+sudo tee /etc/nginx/sites-available/caesarus.tech > /dev/null <<EOL
 server {
     listen 80;
     listen [::]:80;
@@ -48,6 +48,6 @@ sudo ln -s /etc/nginx/sites-available/caesarus.tech /etc/nginx/sites-enabled/
 sudo nginx -t
 
 # If the configuration is valid, restart Nginx
-if [ $? -eq 0 ]; then
+if sudo nginx -t; then
     sudo systemctl restart nginx
 fi
