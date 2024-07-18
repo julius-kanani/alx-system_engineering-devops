@@ -26,35 +26,26 @@ exec {'ufw enable':
 # Create a new directory for the caesarus.tech website and set the appropriate permissions
 file {'/var/www/caesarus.tech/html':
   ensure => directory,
-  owner  => www-data,
-  group  => www-data,
+  owner  => root,
+  group  => root,
   mode   => '0755',
 }
 
 # Create an index.html file for the caesarus.tech website
 file {'/var/www/caesarus.tech/html/index.html':
   ensure => file,
-  owner  => www-data,
-  group  => www-data,
-  mode   => '0644',
   content => 'Hello World!',
 }
 
 # Create a new configuration file for the caesarus.tech server block
 file {'/etc/nginx/sites-available/caesarus.tech':
   ensure => file,
-  owner  => 'root',
-  group  => 'root',
-  mode   => '0644',
   content => "server {\n    listen 80;\n    listen [::]:80;\n\n    root /var/www/caesarus.tech/html;\n    index index.html;\n\n    server_name caesarus.tech 127.0.0.1 localhost 18.210.15.46;\n\n    location / {\n        try_files \$uri \$uri/ =404;\n    }\n\n    location /redirect_me {\n        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n    }\n\n    error_page 404 /custom_404_Page.html;\n}\n",
 }
 
 # Setup custom error 404 page.
 file {'/var/www/caesarus.tech/html/custom_404_Page.html':
   ensure => file,
-  owner  => www-data,
-  group  => www-data,
-  mode   => '0644',
   content => "Ceci n'est pas une page",
 }
 
