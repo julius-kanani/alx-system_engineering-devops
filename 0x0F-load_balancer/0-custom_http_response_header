@@ -25,6 +25,7 @@ sudo chmod -R 755 /var/www/caesarus.tech
 echo "Hello World!" | sudo tee /var/www/caesarus.tech/html/index.html > /dev/null
 
 # Create a new configuration file for the caesarus.tech server block
+# shellcheck disable=SC2154
 sudo tee /etc/nginx/sites-available/caesarus.tech > /dev/null <<EOL
 server {
     listen 80;
