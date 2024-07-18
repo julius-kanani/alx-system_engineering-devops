@@ -26,16 +26,16 @@ exec {'ufw enable':
 # Create a new directory for the caesarus.tech website and set the appropriate permissions
 file {'/var/www/caesarus.tech/html':
   ensure => directory,
-  owner  => $::puppetdb::clientcert,
-  group  => $::puppetdb::clientcert,
+  owner  => www-data,
+  group  => www-data,
   mode   => '0755',
 }
 
 # Create an index.html file for the caesarus.tech website
 file {'/var/www/caesarus.tech/html/index.html':
   ensure => file,
-  owner  => $::puppetdb::clientcert,
-  group  => $::puppetdb::clientcert,
+  owner  => www-data,
+  group  => www-data,
   mode   => '0644',
   content => 'Hello World!',
 }
@@ -52,8 +52,8 @@ file {'/etc/nginx/sites-available/caesarus.tech':
 # Setup custom error 404 page.
 file {'/var/www/caesarus.tech/html/custom_404_Page.html':
   ensure => file,
-  owner  => $::puppetdb::clientcert,
-  group  => $::puppetdb::clientcert,
+  owner  => www-data,
+  group  => www-data,
   mode   => '0644',
   content => "Ceci n'est pas une page",
 }
