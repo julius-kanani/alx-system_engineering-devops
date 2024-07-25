@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script generates a MySQL dump of all databases, compresses it, and names the archive with the current date.
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <mysql_root_password>"
+    exit 1
+fi
+
+MYSQL_ROOT_PASSWORD=$1
+BACKUP_FILE=backup.sql
+DATE=$(date +%d-%m-%Y)
+ARCHIVE_FILE=${DATE}.tar.gz
+
+# Dump all MySQL databases
+if ! mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" --all-databases > "${BACKUP_FILE}"; then
+    echo "Failed to create MySQL dump"
+    exit 1
+fi
+
+# Create a compressed archive
+if ! tar -czvf "${ARCHIVE_FILE}" "${BACKUP_FILE}"; then
+    echo "Failed to create archive"
+    exit 1
+fi
