@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Check if nginx user exists
 if ! id -u nginx &>/dev/null; then
     # Create nginx user if it doesn't exist
